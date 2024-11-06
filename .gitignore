@@ -1,0 +1,9 @@
+spigot/run
+spigot/run-*
+spigot/runs
+spigot/build
+spigot/libs
+.idea
+.gradle
+
+/build
