@@ -10,14 +10,15 @@ import java.util.function.Function;
  * A simple interface for registering listeners.
  */
 public interface ListenerRegistration {
-    void register(Listener listener);
-    void register(Function<JavaPlugin, Listener> listenerFactory);
-
-    void unregister(Listener listener);
-
     static ListenerRegistration create(JavaPlugin plugin) {
         return new Impl(plugin);
     }
+
+    void register(Listener listener);
+
+    void register(Function<JavaPlugin, Listener> listenerFactory);
+
+    void unregister(Listener listener);
 
     class Impl implements ListenerRegistration {
         private final JavaPlugin plugin;

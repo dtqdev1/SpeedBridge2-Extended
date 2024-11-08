@@ -9,7 +9,6 @@ import io.tofpu.speedbridge2.game.state.GameStateType;
 import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.util.Position;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
-import io.tofpu.toolbar.ToolbarAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

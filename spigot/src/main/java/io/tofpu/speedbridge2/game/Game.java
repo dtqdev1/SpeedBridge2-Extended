@@ -2,7 +2,9 @@ package io.tofpu.speedbridge2.game;
 
 import io.tofpu.speedbridge2.arena.Arena;
 import io.tofpu.speedbridge2.game.config.experience.GamePlayerExperienceConfiguration;
-import io.tofpu.speedbridge2.game.state.*;
+import io.tofpu.speedbridge2.game.state.AbstractGameState;
+import io.tofpu.speedbridge2.game.state.GameStateProvider;
+import io.tofpu.speedbridge2.game.state.GameStateType;
 import io.tofpu.speedbridge2.island.Island;
 import org.bukkit.entity.Player;
 

@@ -18,6 +18,10 @@ import static org.immutables.value.Value.Immutable;
  */
 @Immutable
 public interface GamePlayerExperienceConfiguration {
+    static ImmutableGamePlayerExperienceConfiguration.Builder builder() {
+        return ImmutableGamePlayerExperienceConfiguration.builder();
+    }
+
     @SubSection
     @ConfComments("Options to customize the player experience when the game is reset")
     GameOptions reset();
@@ -29,10 +33,6 @@ public interface GamePlayerExperienceConfiguration {
     @SubSection
     @ConfComments("Options to customize the player experience when they surpass their personal best score")
     GameOptions beatenScore();
-
-    static ImmutableGamePlayerExperienceConfiguration.Builder builder() {
-        return ImmutableGamePlayerExperienceConfiguration.builder();
-    }
 
     @Immutable
     interface GameOptions {

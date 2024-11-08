@@ -36,6 +36,12 @@ public class Arena {
         this.generation = new ArenaGeneration(world, clipboard, position);
     }
 
+    private static Vector relative(Vector minimumPoint, Position position, Vector clipboardOrigin) {
+        return minimumPoint
+                .subtract(clipboardOrigin)
+                .add(position.getX(), position.getY(), position.getZ());
+    }
+
     public void generate() {
         // avoid generating the same arena twice
         if (has(GenerationState.GENERATED)) {
@@ -70,12 +76,6 @@ public class Arena {
 
     public Schematic getSchematic() {
         return schematic;
-    }
-
-    private static Vector relative(Vector minimumPoint, Position position, Vector clipboardOrigin) {
-        return minimumPoint
-                .subtract(clipboardOrigin)
-                .add(position.getX(), position.getY(), position.getZ());
     }
 
     public void set(OccupationState occupationState) {

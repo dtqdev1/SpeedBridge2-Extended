@@ -1,7 +1,7 @@
 package io.tofpu.speedbridge2.game.toolbar.item;
 
-import io.tofpu.speedbridge2.game.state.GameStateType;
 import io.tofpu.speedbridge2.game.GameSupplier;
+import io.tofpu.speedbridge2.game.state.GameStateType;
 import io.tofpu.toolbar.toolbar.tool.action.ToolAction;
 import io.tofpu.toolbar.toolbar.tool.action.ToolActionUtil;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;

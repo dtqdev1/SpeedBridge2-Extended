@@ -110,12 +110,12 @@ public class DefaultPositionCalculator<K> implements PositionCalculator<K> {
     static class Width {
         private final int value;
 
-        static Width of(int value) {
-            return new Width(value);
-        }
-
         Width(int value) {
             this.value = value;
+        }
+
+        static Width of(int value) {
+            return new Width(value);
         }
 
         @Override

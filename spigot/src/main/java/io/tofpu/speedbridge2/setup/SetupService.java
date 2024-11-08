@@ -10,7 +10,9 @@ import io.tofpu.speedbridge2.schematic.SchematicService;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class SetupService {
     private final SchematicService schematicService;

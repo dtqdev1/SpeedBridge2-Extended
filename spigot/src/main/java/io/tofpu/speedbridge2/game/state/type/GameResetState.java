@@ -13,6 +13,13 @@ public class GameResetState extends AbstractGameState {
         super(game, GameStateType.RESET);
     }
 
+    private static void removePlacedBlocks(GamePlayer gamePlayer) {
+        for (Location placedBlock : gamePlayer.placedBlocks()) {
+            placedBlock.getBlock().setType(Material.AIR);
+        }
+        gamePlayer.placedBlocks().clear();
+    }
+
     @Override
     public void handle() {
         GamePlayer gamePlayer = game.gamePlayer();
@@ -21,12 +28,5 @@ public class GameResetState extends AbstractGameState {
         // apply the reset experience
         game.experienceConfiguration().reset().apply(gamePlayer.player());
         game.setState(GameStateType.START);
-    }
-
-    private static void removePlacedBlocks(GamePlayer gamePlayer) {
-        for (Location placedBlock : gamePlayer.placedBlocks()) {
-            placedBlock.getBlock().setType(Material.AIR);
-        }
-        gamePlayer.placedBlocks().clear();
     }
 }

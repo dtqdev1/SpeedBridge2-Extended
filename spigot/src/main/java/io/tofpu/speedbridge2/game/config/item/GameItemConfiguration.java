@@ -3,12 +3,10 @@ package io.tofpu.speedbridge2.game.config.item;
 import io.tofpu.speedbridge2.game.config.item.serializer.ItemMetaOptionsSerializer;
 import io.tofpu.speedbridge2.game.config.item.serializer.ItemStackSerializer;
 import org.bukkit.inventory.ItemStack;
-import org.immutables.value.Value;
-import space.arim.dazzleconf.annote.ConfDefault;
 import space.arim.dazzleconf.annote.ConfSerialisers;
 import space.arim.dazzleconf.annote.SubSection;
 
-import static org.immutables.value.Value.*;
+import static org.immutables.value.Value.Immutable;
 
 @ConfSerialisers(value = {
         ItemStackSerializer.class,
@@ -16,12 +14,6 @@ import static org.immutables.value.Value.*;
 })
 @Immutable
 public interface GameItemConfiguration {
-    @SubSection
-    Item leaveGame();
-    @SubSection
-    Item resetGame();
-
-    class Builder extends ImmutableGameItemConfiguration.Builder {}
     static Builder builder() {
         return new Builder();
     }
@@ -30,12 +22,14 @@ public interface GameItemConfiguration {
         return ImmutableGameItemConfiguration.of(leaveGame, resetGame);
     }
 
+    @SubSection
+    Item leaveGame();
+
+    @SubSection
+    Item resetGame();
+
     @Immutable
     interface Item {
-        ItemStack item();
-        int slot();
-
-        class Builder extends ImmutableItem.Builder {}
         static Builder builder() {
             return builder();
         }
@@ -43,5 +37,13 @@ public interface GameItemConfiguration {
         static Item of(ItemStack item, int slot) {
             return ImmutableItem.of(item, slot);
         }
+
+        ItemStack item();
+
+        int slot();
+
+        class Builder extends ImmutableItem.Builder {}
     }
+
+    class Builder extends ImmutableGameItemConfiguration.Builder {}
 }
