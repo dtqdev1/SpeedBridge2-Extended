@@ -1,15 +1,15 @@
 package io.tofpu.speedbridge2.game.state.type;
 
-import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import io.tofpu.speedbridge2.arena.Arena;
 import io.tofpu.speedbridge2.game.Game;
 import io.tofpu.speedbridge2.game.GamePlayer;
 import io.tofpu.speedbridge2.game.state.AbstractGameState;
 import io.tofpu.speedbridge2.game.state.GameStateType;
+import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.util.Position;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
-import org.bukkit.Location;
+import io.tofpu.toolbar.ToolbarAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,8 +27,11 @@ import static io.tofpu.speedbridge2.util.LocationUtil.asVector;
 //  but until then, we'll need to register the listeners and unregister them when the game is stopped
 public class GameStartState extends AbstractGameState implements Listener {
 
-    public GameStartState(Game game) {
+    private final GameEquipmentHandler equipmentHandler;
+
+    public GameStartState(Game game, GameEquipmentHandler equipmentHandler) {
         super(game, GameStateType.START);
+        this.equipmentHandler = equipmentHandler;
     }
 
     @Override
@@ -50,6 +53,8 @@ public class GameStartState extends AbstractGameState implements Listener {
 
         Player player = game.gamePlayer().player();
         player.teleport(gamePosition.toLocation(arena.world()));
+
+        equipmentHandler.equip(player);
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)

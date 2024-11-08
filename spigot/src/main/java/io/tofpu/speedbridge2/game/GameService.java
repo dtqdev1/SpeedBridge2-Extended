@@ -3,19 +3,13 @@ package io.tofpu.speedbridge2.game;
 import io.tofpu.speedbridge2.arena.Arena;
 import io.tofpu.speedbridge2.arena.ArenaManager;
 import io.tofpu.speedbridge2.game.config.GameConfigManager;
-import io.tofpu.speedbridge2.game.config.GameConfiguration;
-import io.tofpu.speedbridge2.game.config.item.GameItemConfiguration;
 import io.tofpu.speedbridge2.game.listener.GameListener;
 import io.tofpu.speedbridge2.game.state.GameStateProvider;
 import io.tofpu.speedbridge2.game.state.GameStateType;
-import io.tofpu.speedbridge2.game.toolbar.GameToolbar;
-import io.tofpu.speedbridge2.game.toolbar.item.GameItem;
-import io.tofpu.speedbridge2.game.toolbar.item.LeaveGameItem;
-import io.tofpu.speedbridge2.game.toolbar.item.ResetGameItem;
+import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
 import io.tofpu.toolbar.ToolbarAPI;
-import io.tofpu.toolbar.toolbar.ToolWithSlot;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -23,29 +17,23 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import static io.tofpu.speedbridge2.game.toolbar.GameToolbarHelper.toolItemMapper;
-
-public class GameService {
+public class GameService implements GameSupplier {
     private final ArenaManager<Integer> arenaManager;
-    private final ToolbarAPI toolbarAPI;
     private final GameConfigManager gameConfigManager;
     private final ListenerRegistration listenerRegistration;
+    private final GameEquipmentHandler equipmentHandler;
+
     private final Map<UUID, Game> gameMap = new HashMap<>();
 
-    public GameService(ArenaManager<Integer> arenaManager, ToolbarAPI toolbarAPI, GameConfigManager gameConfigManager, ListenerRegistration listenerRegistration) {
+    public GameService(ArenaManager<Integer> arenaManager, GameConfigManager gameConfigManager, ListenerRegistration listenerRegistration, ToolbarAPI toolbarAPI) {
         this.arenaManager = arenaManager;
-        this.toolbarAPI = toolbarAPI;
         this.gameConfigManager = gameConfigManager;
         this.listenerRegistration = listenerRegistration;
+        this.equipmentHandler = new GameEquipmentHandler(this, gameConfigManager, toolbarAPI);
     }
 
     public void enable() {
-        GameConfiguration configData = gameConfigManager.getConfigData();
-        GameItemConfiguration itemConfig = configData.item();
-        //noinspection unchecked
-        ToolWithSlot<GameItem>[] gameItems = new ToolWithSlot[]{toolItemMapper(itemConfig.resetGame(), item -> new ResetGameItem(item.item(), this)), toolItemMapper(itemConfig.leaveGame(), item -> new LeaveGameItem(item.item(), this))};
-        this.toolbarAPI.registerToolbar(new GameToolbar("game", gameItems));
-
+        equipmentHandler.register();
         listenerRegistration.register(new GameListener(this));
     }
 
@@ -57,7 +45,7 @@ public class GameService {
         }
 
         Arena arena = arenaManager.generateArena(island.slot(), island.schematic());
-        Game game = new Game(player, island, arena, gameConfigManager.getConfigData().experience(), new GameStateProvider(this::releaseGame, listenerRegistration));
+        Game game = new Game(player, island, arena, gameConfigManager.getConfigData().experience(), new GameStateProvider(this::releaseGame, listenerRegistration, equipmentHandler));
         gameMap.put(playerId, game);
 
         game.setState(GameStateType.START);
@@ -83,18 +71,17 @@ public class GameService {
             return false;
         }
         game.setState(GameStateType.STOP);
+        // we don't need to call the releaseGame method as the game will
+        // call the onStopConsumer consumer when it's stopped
         return true;
     }
 
+    @Override
     public void ifGamePresent(UUID playerId, Consumer<Game> consumer) {
         Game game = gameMap.get(playerId);
         if (game != null) {
             consumer.accept(game);
         }
-    }
-
-    public void resetGame(Player player) {
-
     }
 
     public Game getGame(UUID playerId) {
