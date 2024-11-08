@@ -1,7 +1,6 @@
 package io.tofpu.speedbridge2.island;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class IslandService {
     private final Map<Integer, Island> islandMap = new HashMap<>();
@@ -12,5 +11,13 @@ public class IslandService {
 
     public Island getIsland(int slot) {
         return islandMap.get(slot);
+    }
+
+    public void removeIsland(int slot) {
+        islandMap.remove(slot);
+    }
+
+    public Collection<Island> islands() {
+        return Collections.unmodifiableCollection(islandMap.values());
     }
 }
