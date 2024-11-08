@@ -1,5 +1,6 @@
 package io.tofpu.speedbridge2.game;
 
+import io.tofpu.speedbridge2.Constants;
 import io.tofpu.speedbridge2.arena.Arena;
 import io.tofpu.speedbridge2.arena.ArenaManager;
 import io.tofpu.speedbridge2.game.config.GameConfigManager;
@@ -10,6 +11,7 @@ import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
 import io.tofpu.toolbar.ToolbarAPI;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -25,8 +27,8 @@ public class GameService implements GameSupplier {
 
     private final Map<UUID, Game> gameMap = new HashMap<>();
 
-    public GameService(ArenaManager<Integer> arenaManager, GameConfigManager gameConfigManager, ListenerRegistration listenerRegistration, ToolbarAPI toolbarAPI) {
-        this.arenaManager = arenaManager;
+    public GameService(World world, GameConfigManager gameConfigManager, ListenerRegistration listenerRegistration, ToolbarAPI toolbarAPI) {
+        this.arenaManager = new ArenaManager<>(world, Constants.ArenaPositioning.GAME.apply(() -> gameConfigManager.getConfigData().arena().gap()));
         this.gameConfigManager = gameConfigManager;
         this.listenerRegistration = listenerRegistration;
         this.equipmentHandler = new GameEquipmentHandler(this, gameConfigManager, toolbarAPI);

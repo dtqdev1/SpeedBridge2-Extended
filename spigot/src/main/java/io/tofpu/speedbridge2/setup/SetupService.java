@@ -1,8 +1,8 @@
 package io.tofpu.speedbridge2.setup;
 
+import io.tofpu.speedbridge2.Constants;
 import io.tofpu.speedbridge2.arena.Arena;
 import io.tofpu.speedbridge2.arena.ArenaManager;
-import io.tofpu.speedbridge2.arena.DefaultPositionCalculator;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.island.IslandService;
 import io.tofpu.speedbridge2.schematic.Schematic;
@@ -24,8 +24,7 @@ public class SetupService {
     public SetupService(SchematicService schematicService, IslandService islandService, World world) {
         this.schematicService = schematicService;
         this.islandService = islandService;
-//        this.arenaManager = new ArenaManager<UUID>(world, USE_A_CLASS_COSNTANTS);
-        this.arenaManager = new ArenaManager<>(world, new DefaultPositionCalculator<>(0, 0, 0, () -> 0));
+        this.arenaManager = new ArenaManager<>(world, Constants.ArenaPositioning.SETUP);
     }
 
     public boolean createSetup(Player player, SetupInfo setupInfo) {

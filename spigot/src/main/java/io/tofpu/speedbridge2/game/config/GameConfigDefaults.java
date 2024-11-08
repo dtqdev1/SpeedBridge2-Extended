@@ -2,6 +2,7 @@ package io.tofpu.speedbridge2.game.config;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
+import io.tofpu.speedbridge2.game.config.arena.GameArenaConfiguration;
 import io.tofpu.speedbridge2.game.config.experience.GamePlayerExperienceConfiguration;
 import io.tofpu.speedbridge2.game.config.item.GameItemConfiguration;
 import io.tofpu.speedbridge2.util.ColorUtil;
@@ -14,6 +15,10 @@ import static io.tofpu.speedbridge2.game.config.experience.GamePlayerExperienceC
  * This class is responsible for housing the default configuration values for {@link GameConfiguration}.
  */
 public class GameConfigDefaults {
+    public static GameArenaConfiguration arena() {
+        return GameArenaConfiguration.of(100);
+    }
+
     public static GamePlayerExperienceConfiguration experience() {
         return builder()
                 .reset(GameOptions.builder()
