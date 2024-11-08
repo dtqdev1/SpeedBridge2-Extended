@@ -29,6 +29,9 @@ dependencies {
     implementation("com.github.cryptomorin:XSeries:8.7.1")
     implementation("io.github.revxrsal:lamp.common:4.0.0-beta.19")
     implementation("io.github.revxrsal:lamp.bukkit:4.0.0-beta.19")
+    implementation("net.kyori:adventure-api:4.10.1")
+//    implementation("net.kyori:adventure-text-minimessage:4.10.1")
+    implementation("net.kyori:adventure-platform-bukkit:4.0.1")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
