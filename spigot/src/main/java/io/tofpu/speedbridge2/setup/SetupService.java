@@ -10,12 +10,14 @@ import io.tofpu.speedbridge2.schematic.SchematicService;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
+import java.util.*;
 
 public class SetupService {
     private final SchematicService schematicService;
     private final IslandService islandService;
-    private final ArenaManager<UUID> arenaManager;
+    private final ArenaManager<Integer> arenaManager;
+
+    private final Map<UUID, IslandSetup> playerSetups = new HashMap<>();
 
     public SetupService(SchematicService schematicService, IslandService islandService, World world) {
         this.schematicService = schematicService;
@@ -24,22 +26,29 @@ public class SetupService {
         this.arenaManager = new ArenaManager<>(world, new DefaultPositionCalculator<>(0, 0, 0, () -> 0));
     }
 
-    public void createSetup(Player player, SetupInfo setupInfo) {
+    public boolean createSetup(Player player, SetupInfo setupInfo) {
+        if (playerSetups.containsKey(player.getUniqueId())) {
+            return false;
+        }
+
         // todo: handle the exceptions
         Schematic schematic = schematicService.resolveSchematic(setupInfo.schematicName());
 
         UUID playerId = player.getUniqueId();
-        Arena arena = arenaManager.generateArena(playerId, schematic);
+        Arena arena = arenaManager.generateArena(setupInfo.slot(), schematic);
         if (arena == null) {
             throw new IllegalStateException("Could not create arena!");
         }
 
         IslandSetup setup = new IslandSetup(this, player, setupInfo.slot(), schematic, arena);
+        this.playerSetups.put(playerId, setup);
         setup.start();
+        return true;
     }
 
     public void finishSetup(IslandSetup setup) {
-        cleanUp(setup.player());
+        cleanUp(setup.slot(),setup.player());
+
         if (!setup.canBeFinished()) {
             // todo: throw exception here? as it's unexpected
             return;
@@ -49,8 +58,9 @@ public class SetupService {
         islandService.registerIsland(island);
     }
 
-    public void cleanUp(Player player) {
-        arenaManager.destroyArena(player.getUniqueId(), () -> teleportPlayerToLobby(player));
+    public void cleanUp(int slot, Player player) {
+        this.playerSetups.remove(player.getUniqueId());
+        arenaManager.destroyArena(slot, () -> teleportPlayerToLobby(player));
     }
 
     private void teleportPlayerToLobby(Player player) {
