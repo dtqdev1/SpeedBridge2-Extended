@@ -1,10 +1,12 @@
 package io.tofpu.speedbridge2.setup;
 
+import io.tofpu.speedbridge2.schematic.Schematic;
+
 public class SetupInfo {
     private final int slot;
-    private final String schematic;
+    private final Schematic schematic;
 
-    public SetupInfo(int slot, String schematic) {
+    public SetupInfo(int slot, Schematic schematic) {
         this.slot = slot;
         this.schematic = schematic;
     }
@@ -13,7 +15,7 @@ public class SetupInfo {
         return slot;
     }
 
-    public String schematicName() {
+    public Schematic schematic() {
         return schematic;
     }
 }
