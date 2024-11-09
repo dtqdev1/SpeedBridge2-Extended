@@ -28,7 +28,7 @@ public interface GameItemConfiguration {
     @Immutable
     interface Item {
         static Builder builder() {
-            return builder();
+            return new Builder();
         }
 
         static Item of(ItemStack item, int slot) {
