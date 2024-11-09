@@ -16,7 +16,6 @@ public class GameCommand extends ChildrenCommand {
 
     @Command("join")
     public void joinGame(BukkitCommandActor actor, Island island) {
-        actor.reply(String.format("&eJoining %d island now...", island.slot()));
         if (gameService.startGame(actor.requirePlayer(), island)) {
             actor.reply(String.format("You joined island %d", island.slot()));
         } else {
