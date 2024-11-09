@@ -47,7 +47,7 @@ public class IslandSetup {
     }
 
     public boolean canBeFinished() {
-        https://github.com/Tofpu/SpeedBridge2/blob/6a5813f99bec1c878610353399379f3204d9571d/spigot/src/main/java/io/tofpu/speedbridge2/model/island/object/setup/IslandSetup.java#L157
+        https: // github.com/Tofpu/SpeedBridge2/blob/6a5813f99bec1c878610353399379f3204d9571d/spigot/src/main/java/io/tofpu/speedbridge2/model/island/object/setup/IslandSetup.java#L157
         return spawnPoint != null;
     }
 

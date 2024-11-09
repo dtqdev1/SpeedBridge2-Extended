@@ -4,10 +4,9 @@ import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.regions.Region;
 import io.tofpu.speedbridge2.schematic.Schematic;
 import io.tofpu.speedbridge2.util.Position;
-import org.bukkit.World;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.bukkit.World;
 
 /**
  * This class is responsible for managing the positioning of arenas in the world.
@@ -61,7 +60,8 @@ public class ArenaManager<K> {
      */
     public Arena generateArena(K key, Schematic schematic) {
         Arena arena = occupyArena(key, schematic);
-        // only generate the arena if it has not been generated yet (in case the arena was previously occupied and later freed)
+        // only generate the arena if it has not been generated yet (in case the arena was previously occupied and later
+        // freed)
         if (!arena.has(Arena.GenerationState.GENERATED)) {
             arena.generate();
         }

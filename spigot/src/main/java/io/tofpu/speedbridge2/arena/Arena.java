@@ -37,9 +37,7 @@ public class Arena {
     }
 
     private static Vector relative(Vector minimumPoint, Position position, Vector clipboardOrigin) {
-        return minimumPoint
-                .subtract(clipboardOrigin)
-                .add(position.getX(), position.getY(), position.getZ());
+        return minimumPoint.subtract(clipboardOrigin).add(position.getX(), position.getY(), position.getZ());
     }
 
     public void generate() {

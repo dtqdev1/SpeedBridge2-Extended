@@ -1,10 +1,9 @@
 package io.tofpu.speedbridge2.game;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class GamePlayer {
     private final Player player;

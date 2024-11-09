@@ -1,12 +1,11 @@
 package io.tofpu.speedbridge2.environment;
 
 import io.tofpu.speedbridge2.environment.generator.EmptyChunkGenerator;
+import java.io.File;
+import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-
-import java.io.File;
-import java.io.IOException;
 
 public class EnvironmentService {
     protected static final String WORLD_NAME = "speedbridge2";
@@ -19,6 +18,7 @@ public class EnvironmentService {
      * The directory where our world is stored.
      */
     private File worldDirectory;
+
     private World world;
 
     private boolean isSetup = false;

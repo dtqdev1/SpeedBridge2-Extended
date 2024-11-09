@@ -2,7 +2,6 @@ package io.tofpu.speedbridge2.schematic;
 
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import io.tofpu.multiworldedit.ClipboardWrapper;
-
 import java.io.File;
 
 public class Schematic {

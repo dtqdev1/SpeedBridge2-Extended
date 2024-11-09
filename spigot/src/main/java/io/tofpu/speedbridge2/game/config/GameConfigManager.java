@@ -1,7 +1,6 @@
 package io.tofpu.speedbridge2.game.config;
 
 import io.tofpu.speedbridge2.util.config.ConfigManager;
-
 import java.io.File;
 import java.nio.file.Path;
 

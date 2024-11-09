@@ -1,9 +1,8 @@
 package io.tofpu.speedbridge2.game.config.arena;
 
+import static org.immutables.value.Value.Immutable;
 
 import space.arim.dazzleconf.annote.ConfComments;
-
-import static org.immutables.value.Value.Immutable;
 
 @Immutable
 public interface GameArenaConfiguration {

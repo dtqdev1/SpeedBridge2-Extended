@@ -4,9 +4,8 @@ import io.tofpu.speedbridge2.game.Game;
 import io.tofpu.speedbridge2.game.state.AbstractGameState;
 import io.tofpu.speedbridge2.game.state.GameStateType;
 import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
-import org.bukkit.Location;
-
 import java.util.function.Consumer;
+import org.bukkit.Location;
 
 public class GameStopState extends AbstractGameState {
     private final Consumer<Game> onStopConsumer;

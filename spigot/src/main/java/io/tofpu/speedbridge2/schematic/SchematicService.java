@@ -2,7 +2,6 @@ package io.tofpu.speedbridge2.schematic;
 
 import io.tofpu.multiworldedit.ClipboardWrapper;
 import io.tofpu.speedbridge2.schematic.clipboard.ClipboardResolver;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.Collections;

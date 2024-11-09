@@ -16,6 +16,7 @@ public class ResetGameItem extends GameItem {
     }
 
     private static ToolAction<PlayerInteractAtEntityEvent> handle(GameSupplier gameSupplier) {
-        return (toolbar, event) -> gameSupplier.ifGamePresent(event.getPlayer().getUniqueId(), game -> game.setState(GameStateType.RESET));
+        return (toolbar, event) ->
+                gameSupplier.ifGamePresent(event.getPlayer().getUniqueId(), game -> game.setState(GameStateType.RESET));
     }
 }

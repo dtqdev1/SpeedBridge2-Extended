@@ -1,17 +1,14 @@
 package io.tofpu.speedbridge2.game.config.item;
 
+import static org.immutables.value.Value.Immutable;
+
 import io.tofpu.speedbridge2.game.config.item.serializer.ItemMetaOptionsSerializer;
 import io.tofpu.speedbridge2.game.config.item.serializer.ItemStackSerializer;
 import org.bukkit.inventory.ItemStack;
 import space.arim.dazzleconf.annote.ConfSerialisers;
 import space.arim.dazzleconf.annote.SubSection;
 
-import static org.immutables.value.Value.Immutable;
-
-@ConfSerialisers(value = {
-        ItemStackSerializer.class,
-        ItemMetaOptionsSerializer.class
-})
+@ConfSerialisers(value = {ItemStackSerializer.class, ItemMetaOptionsSerializer.class})
 @Immutable
 public interface GameItemConfiguration {
     static Builder builder() {

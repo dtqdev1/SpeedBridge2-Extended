@@ -1,14 +1,10 @@
 package io.tofpu.speedbridge2.game.command;
 
 import io.tofpu.speedbridge2.command.ChildrenCommand;
-import io.tofpu.speedbridge2.command.CommandHandler;
 import io.tofpu.speedbridge2.game.GameService;
 import io.tofpu.speedbridge2.island.Island;
-import org.bukkit.entity.Player;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
-import revxrsal.commands.command.CommandActor;
-import revxrsal.commands.orphan.OrphanCommand;
 
 @Command("game")
 public class GameCommand extends ChildrenCommand {

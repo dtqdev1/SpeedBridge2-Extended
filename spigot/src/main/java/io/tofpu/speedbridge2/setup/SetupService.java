@@ -6,13 +6,12 @@ import io.tofpu.speedbridge2.arena.ArenaManager;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.island.IslandService;
 import io.tofpu.speedbridge2.schematic.Schematic;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class SetupService {
     private final IslandService islandService;
@@ -56,7 +55,7 @@ public class SetupService {
     }
 
     public void finishSetup(IslandSetup setup) {
-        cleanUp(setup.slot(),setup.player());
+        cleanUp(setup.slot(), setup.player());
 
         if (!setup.canBeFinished()) {
             // todo: throw exception here? as it's unexpected
@@ -74,6 +73,6 @@ public class SetupService {
 
     private void teleportPlayerToLobby(Player player) {
         // todo: lobbyLocation, if not available, teleport to world at 0 index default spawn
-//        player.teleport(lobbyLocation);
+        //        player.teleport(lobbyLocation);
     }
 }

@@ -11,13 +11,12 @@ import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
 import io.tofpu.toolbar.ToolbarAPI;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 public class GameService implements GameSupplier {
     private final ArenaManager<Integer> arenaManager;
@@ -27,8 +26,15 @@ public class GameService implements GameSupplier {
 
     private final Map<UUID, Game> gameMap = new HashMap<>();
 
-    public GameService(World world, GameConfigManager gameConfigManager, ListenerRegistration listenerRegistration, ToolbarAPI toolbarAPI) {
-        this.arenaManager = new ArenaManager<>(world, Constants.ArenaPositioning.GAME.apply(() -> gameConfigManager.getConfigData().arena().gap()));
+    public GameService(
+            World world,
+            GameConfigManager gameConfigManager,
+            ListenerRegistration listenerRegistration,
+            ToolbarAPI toolbarAPI) {
+        this.arenaManager = new ArenaManager<>(
+                world,
+                Constants.ArenaPositioning.GAME.apply(
+                        () -> gameConfigManager.getConfigData().arena().gap()));
         this.gameConfigManager = gameConfigManager;
         this.listenerRegistration = listenerRegistration;
         this.equipmentHandler = new GameEquipmentHandler(this, gameConfigManager, toolbarAPI);
@@ -47,7 +53,12 @@ public class GameService implements GameSupplier {
         }
 
         Arena arena = arenaManager.generateArena(island.slot(), island.schematic());
-        Game game = new Game(player, island, arena, gameConfigManager.getConfigData().experience(), new GameStateProvider(this::releaseGame, listenerRegistration, equipmentHandler));
+        Game game = new Game(
+                player,
+                island,
+                arena,
+                gameConfigManager.getConfigData().experience(),
+                new GameStateProvider(this::releaseGame, listenerRegistration, equipmentHandler));
         gameMap.put(playerId, game);
 
         game.setState(GameStateType.START);

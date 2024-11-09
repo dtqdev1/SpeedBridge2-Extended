@@ -1,17 +1,16 @@
 package io.tofpu.speedbridge2.game.config.experience;
 
+import static org.immutables.value.Value.Immutable;
+
 import io.tofpu.speedbridge2.game.config.experience.meta.Sound;
 import io.tofpu.speedbridge2.game.config.experience.meta.Title;
 import io.tofpu.speedbridge2.util.ColorUtil;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import space.arim.dazzleconf.annote.ConfComments;
 import space.arim.dazzleconf.annote.SubSection;
-
-import java.util.List;
-
-import static org.immutables.value.Value.Immutable;
 
 /**
  * This class is responsible for customizing the player experience. Like, when the game is reset, scored, or a new personal best score is achieved.
@@ -43,10 +42,12 @@ public interface GamePlayerExperienceConfiguration {
 
         @SubSection
         Sound sound();
+
         @SubSection
         Title title();
 
         List<String> commands();
+
         List<String> messages();
 
         default void apply(Player player) {

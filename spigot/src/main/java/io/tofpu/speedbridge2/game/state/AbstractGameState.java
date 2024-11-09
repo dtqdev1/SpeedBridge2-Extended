@@ -19,7 +19,9 @@ public abstract class AbstractGameState {
     }
 
     public abstract void handle();
+
     public void registerListeners(ListenerRegistration listenerRegistration) {}
+
     public void unregisterListeners(ListenerRegistration listenerRegistration) {}
 
     public GameStateType type() {
@@ -32,8 +34,6 @@ public abstract class AbstractGameState {
         }
 
         @Override
-        public void handle() {
-
-        }
+        public void handle() {}
     }
 }

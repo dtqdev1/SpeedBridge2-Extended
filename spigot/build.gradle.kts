@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.diffplug.spotless") version "7.0.0.BETA4"
 }
 
 group = "io.tofpu.speedbridge2"
@@ -37,11 +38,30 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
-tasks.withType<JavaCompile> {
-    // Preserve parameter names in the bytecode
-    options.compilerArgs.add("-parameters")
+spotless {
+//    ratchetFrom("origin/main")
+
+    format("misc") {
+        target("*.gradle", "*.md", ".gitignore")
+
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    java {
+        formatAnnotations()
+        removeUnusedImports()
+        palantirJavaFormat()
+    }
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+    compileJava {
+        options.compilerArgs.add("-parameters")
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }

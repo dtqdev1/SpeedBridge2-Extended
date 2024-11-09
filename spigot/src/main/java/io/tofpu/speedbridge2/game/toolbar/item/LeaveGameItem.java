@@ -16,6 +16,7 @@ public class LeaveGameItem extends GameItem {
     }
 
     private static ToolAction<PlayerInteractAtEntityEvent> handle(GameSupplier gameSupplier) {
-        return (toolbar, event) -> gameSupplier.ifGamePresent(event.getPlayer().getUniqueId(), game -> game.setState(GameStateType.STOP));
+        return (toolbar, event) ->
+                gameSupplier.ifGamePresent(event.getPlayer().getUniqueId(), game -> game.setState(GameStateType.STOP));
     }
 }

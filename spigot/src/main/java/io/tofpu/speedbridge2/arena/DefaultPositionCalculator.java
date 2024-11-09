@@ -2,7 +2,6 @@ package io.tofpu.speedbridge2.arena;
 
 import io.tofpu.speedbridge2.util.ClosestNumberFinder;
 import io.tofpu.speedbridge2.util.Position;
-
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -54,8 +53,7 @@ public class DefaultPositionCalculator<K> implements PositionCalculator<K> {
 
     @Override
     public Position reserve(K key, int width) {
-        return tryToUsePreviouslyReservedPosition(width)
-                .orElseGet(() -> createNewReservedPosition(key, width));
+        return tryToUsePreviouslyReservedPosition(width).orElseGet(() -> createNewReservedPosition(key, width));
     }
 
     private Position createNewReservedPosition(K key, int width) {
@@ -104,7 +102,9 @@ public class DefaultPositionCalculator<K> implements PositionCalculator<K> {
         if (entry == null) {
             return;
         }
-        freeWidthToPositionsMap.computeIfAbsent(entry.key.value, k -> new ArrayList<>()).add(entry.value);
+        freeWidthToPositionsMap
+                .computeIfAbsent(entry.key.value, k -> new ArrayList<>())
+                .add(entry.value);
     }
 
     static class Width {

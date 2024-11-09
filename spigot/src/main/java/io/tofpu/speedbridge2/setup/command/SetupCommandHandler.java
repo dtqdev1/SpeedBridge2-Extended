@@ -10,7 +10,8 @@ public class SetupCommandHandler {
     private final SchematicService schematicService;
     private final SetupService setupService;
 
-    public SetupCommandHandler(CommandHandler commandHandler, SchematicService schematicService, SetupService setupService) {
+    public SetupCommandHandler(
+            CommandHandler commandHandler, SchematicService schematicService, SetupService setupService) {
         this.commandHandler = commandHandler;
         this.schematicService = schematicService;
         this.setupService = setupService;

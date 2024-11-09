@@ -1,5 +1,7 @@
 package io.tofpu.speedbridge2.game.toolbar;
 
+import static io.tofpu.speedbridge2.game.toolbar.GameToolbarHelper.toolItemMapper;
+
 import io.tofpu.speedbridge2.game.GameSupplier;
 import io.tofpu.speedbridge2.game.config.GameConfigManager;
 import io.tofpu.speedbridge2.game.config.GameConfiguration;
@@ -10,8 +12,6 @@ import io.tofpu.speedbridge2.game.toolbar.item.ResetGameItem;
 import io.tofpu.toolbar.ToolbarAPI;
 import io.tofpu.toolbar.toolbar.ToolWithSlot;
 import org.bukkit.entity.Player;
-
-import static io.tofpu.speedbridge2.game.toolbar.GameToolbarHelper.toolItemMapper;
 
 public class GameEquipmentHandler {
     protected static final String TOOLBAR_IDENTIFIER = "game";
@@ -30,9 +30,9 @@ public class GameEquipmentHandler {
         GameConfiguration configData = gameConfigManager.getConfigData();
         GameItemConfiguration itemConfig = configData.item();
         //noinspection unchecked
-        ToolWithSlot<GameItem>[] gameItems = new ToolWithSlot[]{
-                toolItemMapper(itemConfig.resetGame(), item -> new ResetGameItem(item.item(), gameSupplier)),
-                toolItemMapper(itemConfig.leaveGame(), item -> new LeaveGameItem(item.item(), gameSupplier))
+        ToolWithSlot<GameItem>[] gameItems = new ToolWithSlot[] {
+            toolItemMapper(itemConfig.resetGame(), item -> new ResetGameItem(item.item(), gameSupplier)),
+            toolItemMapper(itemConfig.leaveGame(), item -> new LeaveGameItem(item.item(), gameSupplier))
         };
         this.toolbarAPI.registerToolbar(new GameToolbar(TOOLBAR_IDENTIFIER, gameItems));
     }

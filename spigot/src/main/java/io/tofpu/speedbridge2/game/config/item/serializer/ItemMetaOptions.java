@@ -1,9 +1,8 @@
 package io.tofpu.speedbridge2.game.config.item.serializer;
 
+import java.util.List;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.List;
 
 public class ItemMetaOptions {
     private final String displayName;

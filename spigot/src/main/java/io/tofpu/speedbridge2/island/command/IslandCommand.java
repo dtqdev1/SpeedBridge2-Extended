@@ -3,11 +3,10 @@ package io.tofpu.speedbridge2.island.command;
 import io.tofpu.speedbridge2.command.ChildrenCommand;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.island.IslandService;
+import java.util.Collection;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.command.CommandActor;
-
-import java.util.Collection;
 
 @Command("island")
 public class IslandCommand extends ChildrenCommand {
@@ -19,11 +18,8 @@ public class IslandCommand extends ChildrenCommand {
 
     private static String islandInfo(Island island) {
         return String.format(
-                "&7Island: &f%s\n" +
-                "&8-> &7Schematic = &f%s\n",
-                island.slot(),
-                island.schematic().name()
-        );
+                "&7Island: &f%s\n" + "&8-> &7Schematic = &f%s\n",
+                island.slot(), island.schematic().name());
     }
 
     @Subcommand("remove")

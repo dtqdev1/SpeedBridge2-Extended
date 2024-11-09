@@ -7,8 +7,10 @@ import space.arim.dazzleconf.annote.SubSection;
 
 public interface ItemStackConfiguration {
     Material material();
+
     @ConfDefault.DefaultInteger(1)
     int amount();
+
     short durability();
 
     @SubSection

@@ -11,10 +11,9 @@ import io.tofpu.multiworldedit.EditSessionWrapper;
 import io.tofpu.multiworldedit.MultiWorldEditAPI;
 import io.tofpu.multiworldedit.VectorWrapper;
 import io.tofpu.speedbridge2.util.Position;
+import java.io.IOException;
 import org.bukkit.Material;
 import org.bukkit.World;
-
-import java.io.IOException;
 
 public class ArenaGeneration {
     private final World world;
@@ -33,8 +32,8 @@ public class ArenaGeneration {
     public void generate() {
         final BukkitWorld bukkitWorld = new BukkitWorld(world);
 
-        try (final EditSessionWrapper editSessionWrapper = MultiWorldEditAPI.getMultiWorldEdit()
-                .create(bukkitWorld, -1)) {
+        try (final EditSessionWrapper editSessionWrapper =
+                MultiWorldEditAPI.getMultiWorldEdit().create(bukkitWorld, -1)) {
             final EditSession editSession = editSessionWrapper.to();
 
             final Operation operation = MultiWorldEditAPI.getMultiWorldEdit()
@@ -55,8 +54,8 @@ public class ArenaGeneration {
      * Destroys the arena in the world using the provided {@link Clipboard} and {@link Position} data.
      */
     public void destroy() {
-        final ClipboardWrapper clipboardWrapper = MultiWorldEditAPI.getMultiWorldEdit()
-                .create(clipboard);
+        final ClipboardWrapper clipboardWrapper =
+                MultiWorldEditAPI.getMultiWorldEdit().create(clipboard);
 
         final VectorWrapper minimumPoint = clipboardWrapper.getMinimumPoint();
         final VectorWrapper maximumPoint = clipboardWrapper.getMaximumPoint();
@@ -70,14 +69,12 @@ public class ArenaGeneration {
         // resetting the blocks
         for (int x = 0; x < maximumPoint.getX() - minimumPoint.getX() + offset; x++) {
             for (int y = 0; y < maximumPoint.getY() - minimumPoint.getY() + offset; y++) {
-                for (int z = 0;
-                     z < maximumPoint.getZ() - minimumPoint.getZ() + offset; z++) {
+                for (int z = 0; z < maximumPoint.getZ() - minimumPoint.getZ() + offset; z++) {
                     final int blockX = plotX + x;
                     final int blockY = plotY + y;
                     final int blockZ = plotZ + z;
 
-                    world.getBlockAt(blockX, blockY, blockZ)
-                            .setType(Material.AIR);
+                    world.getBlockAt(blockX, blockY, blockZ).setType(Material.AIR);
                 }
             }
         }

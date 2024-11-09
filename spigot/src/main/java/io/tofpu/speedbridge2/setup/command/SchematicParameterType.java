@@ -18,7 +18,8 @@ public class SchematicParameterType implements ParameterType<BukkitCommandActor,
     }
 
     @Override
-    public Schematic parse(@NotNull MutableStringStream input, @NotNull ExecutionContext<@NotNull BukkitCommandActor> context) {
+    public Schematic parse(
+            @NotNull MutableStringStream input, @NotNull ExecutionContext<@NotNull BukkitCommandActor> context) {
         String schematicName = input.readString();
         Schematic schematic = schematicService.resolveSchematic(schematicName);
         if (schematic == null) {

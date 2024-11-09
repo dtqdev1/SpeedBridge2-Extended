@@ -1,15 +1,14 @@
 package io.tofpu.speedbridge2.game.config.item.serializer;
 
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import space.arim.dazzleconf.error.BadValueException;
 import space.arim.dazzleconf.serialiser.Decomposer;
 import space.arim.dazzleconf.serialiser.FlexibleType;
 import space.arim.dazzleconf.serialiser.ValueSerialiser;
-
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ItemStackSerializer implements ValueSerialiser<ItemStack> {
 
@@ -25,7 +24,8 @@ public class ItemStackSerializer implements ValueSerialiser<ItemStack> {
 
     @Override
     public ItemStack deserialise(FlexibleType flexibleType) throws BadValueException {
-        Map<String, Object> map = flexibleType.getMap((flexibleKey, flexibleValue) -> new AbstractMap.SimpleEntry<>(flexibleKey.getString(), flexibleKey.getObject(Object.class)));
+        Map<String, Object> map = flexibleType.getMap((flexibleKey, flexibleValue) ->
+                new AbstractMap.SimpleEntry<>(flexibleKey.getString(), flexibleKey.getObject(Object.class)));
         Material material = Material.valueOf(map.get(MATERIAL).toString());
         int amount = Integer.parseInt(map.get(AMOUNT).toString());
         short durability = Short.parseShort(map.get(DURABILITY).toString());

@@ -7,7 +7,6 @@ import io.tofpu.speedbridge2.game.state.type.GameStartState;
 import io.tofpu.speedbridge2.game.state.type.GameStopState;
 import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -18,7 +17,10 @@ public class GameStateProvider {
     private final Map<GameStateType, AbstractGameState> stateCache = new HashMap<>();
     private final GameEquipmentHandler equipmentHandler;
 
-    public GameStateProvider(Consumer<Game> onStopConsumer, ListenerRegistration listenerRegistration, GameEquipmentHandler equipmentHandler) {
+    public GameStateProvider(
+            Consumer<Game> onStopConsumer,
+            ListenerRegistration listenerRegistration,
+            GameEquipmentHandler equipmentHandler) {
         this.onStopConsumer = onStopConsumer;
         this.listenerRegistration = listenerRegistration;
         this.equipmentHandler = equipmentHandler;
@@ -35,7 +37,7 @@ public class GameStateProvider {
                 stateInstance = new GameStartState(game, equipmentHandler);
                 break;
             case RESET:
-                stateInstance= new GameResetState(game);
+                stateInstance = new GameResetState(game);
                 break;
             case SCORE:
                 stateInstance = new GameScoreState(game);

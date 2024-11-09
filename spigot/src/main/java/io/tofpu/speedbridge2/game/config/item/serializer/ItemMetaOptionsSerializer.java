@@ -1,14 +1,13 @@
 package io.tofpu.speedbridge2.game.config.item.serializer;
 
-import space.arim.dazzleconf.error.BadValueException;
-import space.arim.dazzleconf.serialiser.Decomposer;
-import space.arim.dazzleconf.serialiser.FlexibleType;
-import space.arim.dazzleconf.serialiser.ValueSerialiser;
-
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import space.arim.dazzleconf.error.BadValueException;
+import space.arim.dazzleconf.serialiser.Decomposer;
+import space.arim.dazzleconf.serialiser.FlexibleType;
+import space.arim.dazzleconf.serialiser.ValueSerialiser;
 
 public class ItemMetaOptionsSerializer implements ValueSerialiser<ItemMetaOptions> {
 
@@ -22,7 +21,8 @@ public class ItemMetaOptionsSerializer implements ValueSerialiser<ItemMetaOption
 
     @Override
     public ItemMetaOptions deserialise(FlexibleType flexibleType) throws BadValueException {
-        Map<String, Object> map = flexibleType.getMap((flexibleKey, flexibleValue) -> new AbstractMap.SimpleEntry<>(flexibleKey.getString(), flexibleKey.getObject(Object.class)));
+        Map<String, Object> map = flexibleType.getMap((flexibleKey, flexibleValue) ->
+                new AbstractMap.SimpleEntry<>(flexibleKey.getString(), flexibleKey.getObject(Object.class)));
         String displayName = map.get(DISPLAY_NAME).toString();
         List<String> lore = (List<String>) map.get(LORE);
         return new ItemMetaOptions(displayName, lore);

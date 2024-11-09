@@ -1,8 +1,8 @@
 package io.tofpu.speedbridge2.game.config.experience.meta;
 
-import org.bukkit.entity.Player;
-
 import static org.immutables.value.Value.Immutable;
+
+import org.bukkit.entity.Player;
 
 // todo: add support for specifying a fade in and fade out time
 @Immutable

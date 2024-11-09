@@ -20,7 +20,12 @@ public class Game {
 
     private AbstractGameState state = AbstractGameState.identity(this);
 
-    public Game(Player player, Island island, Arena arena, GamePlayerExperienceConfiguration experienceConfiguration, GameStateProvider stateProvider) {
+    public Game(
+            Player player,
+            Island island,
+            Arena arena,
+            GamePlayerExperienceConfiguration experienceConfiguration,
+            GameStateProvider stateProvider) {
         this.gamePlayer = new GamePlayer(player, this);
         this.island = island;
         this.arena = arena;

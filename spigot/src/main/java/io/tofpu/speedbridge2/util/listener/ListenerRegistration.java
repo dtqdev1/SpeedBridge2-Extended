@@ -1,10 +1,9 @@
 package io.tofpu.speedbridge2.util.listener;
 
+import java.util.function.Function;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.function.Function;
 
 /**
  * A simple interface for registering listeners.
