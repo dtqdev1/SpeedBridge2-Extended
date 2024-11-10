@@ -9,6 +9,7 @@ import io.tofpu.speedbridge2.game.state.GameStateProvider;
 import io.tofpu.speedbridge2.game.state.GameStateType;
 import io.tofpu.speedbridge2.game.toolbar.GameEquipmentHandler;
 import io.tofpu.speedbridge2.island.Island;
+import io.tofpu.speedbridge2.lobby.LobbyTeleporter;
 import io.tofpu.speedbridge2.util.listener.ListenerRegistration;
 import io.tofpu.toolbar.ToolbarAPI;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class GameService implements GameSupplier {
     private final ArenaManager<Integer> arenaManager;
     private final GameConfigManager gameConfigManager;
     private final ListenerRegistration listenerRegistration;
+    private final LobbyTeleporter lobbyTeleporter;
     private final GameEquipmentHandler equipmentHandler;
 
     private final Map<UUID, Game> gameMap = new HashMap<>();
@@ -29,8 +31,9 @@ public class GameService implements GameSupplier {
     public GameService(
             World world,
             GameConfigManager gameConfigManager,
-            ListenerRegistration listenerRegistration,
+            ListenerRegistration listenerRegistration, LobbyTeleporter lobbyTeleporter,
             ToolbarAPI toolbarAPI) {
+        this.lobbyTeleporter = lobbyTeleporter;
         this.arenaManager = new ArenaManager<>(
                 world,
                 Constants.ArenaPositioning.GAME.apply(
@@ -73,9 +76,14 @@ public class GameService implements GameSupplier {
     private void releaseGame(Game game) {
         game.stateProvider().unregisterAllListeners();
 
-        UUID playerId = game.gamePlayer().player().getUniqueId();
+        Player player = game.gamePlayer().player();
+        UUID playerId = player.getUniqueId();
         gameMap.remove(playerId);
         arenaManager.releaseArena(game.island().slot());
+
+        if (player.isOnline()) {
+            lobbyTeleporter.teleportToLobby(player);
+        }
     }
 
     public boolean stopGame(Player player) {

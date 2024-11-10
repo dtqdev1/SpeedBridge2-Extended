@@ -5,6 +5,7 @@ import io.tofpu.speedbridge2.arena.Arena;
 import io.tofpu.speedbridge2.arena.ArenaManager;
 import io.tofpu.speedbridge2.island.Island;
 import io.tofpu.speedbridge2.island.IslandService;
+import io.tofpu.speedbridge2.lobby.LobbyTeleporter;
 import io.tofpu.speedbridge2.schematic.Schematic;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,12 +16,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class SetupService {
     private final IslandService islandService;
+    private final LobbyTeleporter lobbyTeleporter;
     private final ArenaManager<Integer> arenaManager;
 
     private final Map<UUID, IslandSetup> playerSetups = new HashMap<>();
 
-    public SetupService(IslandService islandService, World world) {
+    public SetupService(IslandService islandService, LobbyTeleporter lobbyTeleporter, World world) {
         this.islandService = islandService;
+        this.lobbyTeleporter = lobbyTeleporter;
         this.arenaManager = new ArenaManager<>(world, Constants.ArenaPositioning.SETUP);
     }
 
@@ -72,7 +75,6 @@ public class SetupService {
     }
 
     private void teleportPlayerToLobby(Player player) {
-        // todo: lobbyLocation, if not available, teleport to world at 0 index default spawn
-        //        player.teleport(lobbyLocation);
+        lobbyTeleporter.teleportToLobby(player);
     }
 }
