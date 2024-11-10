@@ -12,6 +12,10 @@ public class LobbyService implements LobbyTeleporter {
         this.lobby = lobby;
     }
 
+    public Location lobby() {
+        return lobby;
+    }
+
     @Override
     public void teleportToLobby(Player player) {
         if (lobby == null) {
