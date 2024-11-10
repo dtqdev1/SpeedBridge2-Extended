@@ -3,10 +3,10 @@ package io.tofpu.speedbridge2.game.command;
 import io.tofpu.speedbridge2.command.ChildrenCommand;
 import io.tofpu.speedbridge2.game.GameService;
 import io.tofpu.speedbridge2.island.Island;
-import revxrsal.commands.annotation.Command;
+import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 
-@Command("game")
+@Subcommand("game")
 public class GameCommand extends ChildrenCommand {
     private final GameService gameService;
 
@@ -14,7 +14,7 @@ public class GameCommand extends ChildrenCommand {
         this.gameService = gameService;
     }
 
-    @Command("join")
+    @Subcommand("join")
     public void joinGame(BukkitCommandActor actor, Island island) {
         if (gameService.startGame(actor.requirePlayer(), island)) {
             actor.reply(String.format("You joined island %d", island.slot()));
@@ -23,7 +23,7 @@ public class GameCommand extends ChildrenCommand {
         }
     }
 
-    @Command("leave")
+    @Subcommand("leave")
     public void leaveGame(BukkitCommandActor actor) {
         if (gameService.stopGame(actor.requirePlayer())) {
             actor.reply("&eYou left the game");
