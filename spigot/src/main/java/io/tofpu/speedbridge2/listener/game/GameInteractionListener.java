@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 //import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
+import java.io.*;
+import java.lang.Thread;
 
 @AutoRegister
 public final class GameInteractionListener extends GameListener {
@@ -41,7 +43,7 @@ public final class GameInteractionListener extends GameListener {
     }
 
     @EventHandler // skipcq: JAVA-W0324
-    private void whenPlayerScore(final @NotNull PlayerInteractEventWrapper eventWrapper) {
+    private void whenPlayerScore(final @NotNull PlayerInteractEventWrapper eventWrapper) throws InterruptedException {
         final BridgePlayer player = eventWrapper.getBridgePlayer();
         final GameIsland currentGame = player.getCurrentGame();
 
@@ -58,6 +60,7 @@ public final class GameInteractionListener extends GameListener {
         player.increment(PlayerStatType.TOTAL_WINS);
 
         BridgeUtil.sendMessage(player, String.format(Message.INSTANCE.scored, BridgeUtil.formatNumber(score.getScore())));
+        Thread.sleep(150);
         bukkitPlayer.playSound(bukkitPlayer.getLocation(), Sound.LEVEL_UP, 1, 100);
         //TitleSender.sendTitle(bukkitPlayer, CC.GREEN + "Time" + CC.GRAY + ":" + CC.YELLOW + score, PacketPlayOutTitle.EnumTitleAction.TITLE, 1, 20, 1);
         currentGame.resetGame(false);
