@@ -1,7 +1,6 @@
 package io.tofpu.speedbridge2.listener.game;
 
 import io.tofpu.dynamicclass.meta.AutoRegister;
-//import io.tofpu.speedbridge2.util.material.CC;
 import io.tofpu.speedbridge2.listener.GameListener;
 import io.tofpu.speedbridge2.listener.wrapper.wrappers.BlockPlaceEventWrapper;
 import io.tofpu.speedbridge2.listener.wrapper.wrappers.PlayerInteractEventWrapper;
@@ -17,12 +16,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-//import io.tofpu.speedbridge2.util.material.TitleSender;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-//import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
-import java.io.*;
-import java.lang.Thread;
 
 @AutoRegister
 public final class GameInteractionListener extends GameListener {
@@ -40,6 +35,8 @@ public final class GameInteractionListener extends GameListener {
 
         gamePlayer.startTimer();
         BridgeUtil.sendMessage(event.getPlayer(), Message.INSTANCE.timeStarted);
+        //When a player start a bridge, server will start record a replay until it stops.
+        //Pending...
     }
 
     @EventHandler // skipcq: JAVA-W0324
@@ -58,11 +55,12 @@ public final class GameInteractionListener extends GameListener {
         final Score score = Score.of(island.getSlot(), seconds);
         player.setScoreIfLower(island.getSlot(), score.getScore());
         player.increment(PlayerStatType.TOTAL_WINS);
-
+        
+        //When a player score, server will play level up sound, replay will be stop
         BridgeUtil.sendMessage(player, String.format(Message.INSTANCE.scored, BridgeUtil.formatNumber(score.getScore())));
-        Thread.sleep(150);
+        Thread.sleep(200);
         bukkitPlayer.playSound(bukkitPlayer.getLocation(), Sound.LEVEL_UP, 1, 100);
-        //TitleSender.sendTitle(bukkitPlayer, CC.GREEN + "Time" + CC.GRAY + ":" + CC.YELLOW + score, PacketPlayOutTitle.EnumTitleAction.TITLE, 1, 20, 1);
         currentGame.resetGame(false);
+        bukkitPlayer.performCommand("replay stop");
     }
 }

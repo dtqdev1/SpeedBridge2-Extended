@@ -51,7 +51,7 @@ import static io.tofpu.speedbridge2.model.common.util.MessageUtil.Symbols.*;
 public final class SpeedBridgeCommand implements CommandHandlerVisitor {
     private static final String EMPTY_SCORE = "<red>You haven't scored anything yet";
     private static final String FORMATTED_SCORE =
-            " <gold><bold>" + CROSS.getSymbol() + " " + "<reset><yellow>Island " +
+            " <gold><bold>" + CROSS.getSymbol() + " " + "<reset><yellow>Mode " +
                     "<gold>%s</gold>" + " " + ARROW_RIGHT.getSymbol() +
                     " <gold>%s</gold> seconds";
 

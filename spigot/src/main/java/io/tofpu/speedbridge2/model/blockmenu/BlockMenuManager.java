@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 
 public final class BlockMenuManager {
     public static final BlockMenuManager INSTANCE = new BlockMenuManager();
-    private static final int BLOCK_CHANGE_COOLDOWN = 30;
+    private static final int BLOCK_CHANGE_COOLDOWN = 2;
     private final Set<Material> materialSet = new HashSet<>();
     private final Cache<UUID, Long> cooldownMap;
 
