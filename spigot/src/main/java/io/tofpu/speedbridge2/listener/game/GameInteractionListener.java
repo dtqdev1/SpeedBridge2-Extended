@@ -35,8 +35,6 @@ public final class GameInteractionListener extends GameListener {
 
         gamePlayer.startTimer();
         BridgeUtil.sendMessage(event.getPlayer(), Message.INSTANCE.timeStarted);
-        //When a player start a bridge, server will start record a replay until it stops.
-        //Pending...
     }
 
     @EventHandler // skipcq: JAVA-W0324
@@ -56,11 +54,9 @@ public final class GameInteractionListener extends GameListener {
         player.setScoreIfLower(island.getSlot(), score.getScore());
         player.increment(PlayerStatType.TOTAL_WINS);
         
-        //When a player score, server will play level up sound, replay will be stop
         BridgeUtil.sendMessage(player, String.format(Message.INSTANCE.scored, BridgeUtil.formatNumber(score.getScore())));
-        Thread.sleep(200);
-        bukkitPlayer.playSound(bukkitPlayer.getLocation(), Sound.LEVEL_UP, 1, 100);
+        Thread.sleep(150);
+        bukkitPlayer.playSound(bukkitPlayer.getLocation(), Sound.LEVEL_UP, 100, 1);
         currentGame.resetGame(false);
-        bukkitPlayer.performCommand("replay stop");
     }
 }
